@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RegistrationForm</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<style>
+		.container{
+	background: #2323;
+	width: 800px;
+	height: 600px;
+	margin: 20px auto;
+}
+input {
+	width: 60px;
+	padding: 40px solid red;
+	margin: 20px auto;
+}
+	</style>
+	
+</head>
+<body>
+	<div class =  "container">
+		<h1 class="text-center">Registrate with us</h1>
+		<form id="regForm">
+			<div calss="alert" id="msg"></div>
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="name">
+    <label>Email</label>
+    <input type="text" class="form-control" id="email" name="email" placeholder="email">
+    <label>Password</label>
+    <input type="text" class="form-control" id="password" name="password" placeholder="password">
+    <label>Confirm Password</label>
+    <input type="text" class="form-control" id="password2" name="password2" placeholder="confirm password">
+  </div>
+  <button type="submit" class="btn btn-primary btn-block">Submit</button>
+</form>
+	</div>
+		<script>
+		function register(e){
+			e.preventDefault();
+			var name = document.getElementById("name").value;
+			var email = document.getElementById("email").value;
+			var password = document.getElementById("password").value;
+			var password2 = document.getElementById("password2").value;
+			var msg = document.getElementById("msg");
+			if(name=="" || email=="" || password=="" || password2==""){
+				msg.className="alert alert-danger"
+				msg.innerHTML = "Please Fill All Field"
+			} else {
+				if(name.length<3){
+					msg.className="alert alert-danger"
+				msg.innerHTML = "Name must be at least 3 characters"
+				} else {
+					 var atpo = email.indexOf("@");
+ 					 var dotpo = email.lastIndexOf(".");
+ 					 if(atpo<1 || dotpo < atpo + 2 || dotpo + 2>= email.length){
+ 					 	msg.className="alert alert-danger"
+						msg.innerHTML = "Please Use a Valid Email"
+ 					 } else {
+ 					 	if(password != password2){
+ 					 		msg.className="alert alert-danger"
+							msg.innerHTML = "Password do not match"
+ 					 	} else {
+ 					 		msg.className="alert alert-success"
+							msg.innerHTML = name +" is registrate with email "+ email;
+ 					 	}
+
+ 					 }
+				}
+			}
+
+		};
+		document.getElementById("regForm").addEventListener("submit",register,false);
+	</script>
+</body>
+</html>
